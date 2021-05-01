@@ -14,4 +14,4 @@ jobs:
       - name: install gfortran
         run: sudo apt-get install -y gfortran
       - name: build application
-        run: make build
+        run: make
