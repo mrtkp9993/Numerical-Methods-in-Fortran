@@ -45,6 +45,7 @@ contains
 
     subroutine print(this)
         class(tests), intent(in) :: this
+        integer                  :: i
 
         if (this%numFailed .eq. 0) then
             print *, ""
@@ -56,7 +57,9 @@ contains
             print *, ""
             print *, "Failed tests"
             print *, "------------"
-            print *, this%failedTests
+            do i = 1, this%numFailed
+                print *, i, " ", this%failedTests(i)
+            end do
             print *, ""
         end if
     end subroutine print
