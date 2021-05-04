@@ -17,8 +17,9 @@ program main
     call tester%init()
 
     call tester%assertEqualsWith("e to the pi minus pi", result1, expected1, tol)
-    call tester%assertEquals("This test must be fail", result2, expected2)
+    !call tester%assertEquals("This test must be fail", result2, expected2)
 
     call tester%print()
+    call tester%end()
 
 end program

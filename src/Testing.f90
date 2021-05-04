@@ -9,6 +9,7 @@ module Testing
             procedure :: init
             procedure :: assertEquals, assertEqualsWith
             procedure :: print
+            procedure :: end
     end type Tests
 contains
     subroutine init(this)
@@ -46,12 +47,25 @@ contains
         class(tests), intent(in) :: this
 
         if (this%numFailed .eq. 0) then
+            print *, ""
             print *, "All tests performed successfully."
+            print *, ""
         else
+            print *, ""
             print *, this%numFailed, " of ", this%numTests, " tests failed."
+            print *, ""
             print *, "Failed tests"
             print *, "------------"
             print *, this%failedTests
+            print *, ""
         end if
     end subroutine print
+
+    subroutine end(this)
+        class(tests), intent(in) :: this
+
+        if (this%numFailed .ne. 0) then
+            error stop "There are failed tests."
+        end if
+    end subroutine end
 end module Testing
