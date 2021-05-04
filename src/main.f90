@@ -1,26 +1,24 @@
-module tests
-    use Assert
-    use Constants
-    implicit none
-
-    real(kind=RP) :: result1  = C_E**C_PI - C_PI
-    real(kind=RP) :: expected1 = 19.99909997
-    real(kind=RP) :: tol       = 1e-6
-
-    contains
-        subroutine testConstants()
-            print *, "Numerical-Methods-in-Fortran"
-            print *, "e to the pi minus pi: ", result1
-            print *, "Assertion: ", assertEqualsWith(result1, expected1, tol)
-        end subroutine testConstants
-end module tests
-
 program main
     use Assert
     use Constants
-    use tests
+    use Testing
     implicit none
 
-    call testConstants()
+    type(Tests) :: tester
+
+    real(kind=RP) :: tol       = 1e-6
+
+    real(kind=RP) :: result1   = C_E**C_PI - C_PI
+    real(kind=RP) :: expected1 = 19.99909997
+
+    real(kind=RP) :: result2 = 2 + 2
+    real(kind=RP) :: expected2 = 5
+
+    call tester%init()
+
+    call tester%assertEqualsWith("e to the pi minus pi", result1, expected1, tol)
+    call tester%assertEquals("This test must be fail", result2, expected2)
+
+    call tester%print()
 
 end program
