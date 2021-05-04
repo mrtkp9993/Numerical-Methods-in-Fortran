@@ -6,7 +6,7 @@ Numerical analysis, statistics algorithms in Fortran.
 
 ## Motivation
 
-Two years ago, I developed some numerical analysis examples with C++ and a few months ago, I started development with Julia. My observation is, when I implemented the same algorithm in MATLAB and Julia, in the same way, Julia program needs many more iterations for converge than MATLAB implementation. And, my  Julia implementations has more numerical instabilities than my MATLAB implementations. So I give up with Julia and I decided to develop algorithms with Fortran.
+Two years ago, I developed some numerical analysis examples with C++ and a few months ago, I started development with Julia but I give up with Julia (click [here](https://github.com/mrtkp9993/NumericalAlgorithms.jl/blob/main/README.md) for my reasons) and I decided to develop algorithms with Fortran.
 
 ## Plotting
 
