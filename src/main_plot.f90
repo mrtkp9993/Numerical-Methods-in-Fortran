@@ -1,17 +1,9 @@
-! ============================================================================
-! Name        : Numerical-Methods-in-Fortran.f90
-! Author      : Murat Koptur
-! Version     :
-! Copyright   : 
-! Description : Hello World in Fortran
-! ============================================================================
-
 program main_plot
     use Plots
     implicit none
 
-    integer, parameter    :: M = 50
-    integer               :: x, y, i
+    integer, parameter :: M = 50
+    integer :: x, y, i
     real, dimension(M, 2) :: matrix
 
     matrix(1, 1) = 0.0

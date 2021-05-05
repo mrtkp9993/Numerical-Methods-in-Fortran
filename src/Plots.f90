@@ -16,7 +16,7 @@ contains
         print '(a)', 'set ylabel "y"'
         print '(a)', 'plot "-" using 1:2 with lines'
 
-        print '((F8.5, ",", F8.5))', ((matrix(i,j), j = 1, 2), i = 1, size(matrix, 1))
+        print '((F8.5, ",", F8.5))', ((matrix(i, j), j = 1, 2), i = 1, size(matrix, 1))
 
     end subroutine plot2d
 

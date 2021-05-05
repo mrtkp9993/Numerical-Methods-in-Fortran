@@ -7,10 +7,10 @@ program main
 
     type(Tests) :: tester
 
-    real(kind=RP) :: tol       = 1e-6
+    real(kind = RP) :: tol = 1e-6
 
-    real(kind=RP) :: r1 = C_E**C_PI - C_PI
-    real(kind=RP) :: e1 = 19.99909997
+    real(kind = RP) :: r1 = C_E**C_PI - C_PI
+    real(kind = RP) :: e1 = 19.99909997
 
     call tester%init()
 

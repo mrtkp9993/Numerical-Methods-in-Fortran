@@ -5,24 +5,24 @@ module Testing
     type Tests
         integer :: numTests, numFailed
         character(40), allocatable, dimension(:) :: failedTests
-        contains
-            procedure :: init
-            procedure :: assertEquals, assertEqualsWith
-            procedure :: print
-            procedure :: end
+    contains
+        procedure :: init
+        procedure :: assertEquals, assertEqualsWith
+        procedure :: print
+        procedure :: end
     end type Tests
 contains
     subroutine init(this)
         class(Tests), intent(inout) :: this
         allocate(this%failedTests(0))
-        this%numTests  = 0
+        this%numTests = 0
         this%numFailed = 0
     end subroutine init
 
     subroutine assertEquals(this, name, actual, expected)
         class(tests), intent(inout) :: this
-        character(*), intent(in)    :: name
-        real(kind=RP), intent(in)   :: actual, expected
+        character(*), intent(in) :: name
+        real(kind = RP), intent(in) :: actual, expected
 
         this%numTests = this%numTests + 1
         if (actual .ne. expected) then
@@ -33,8 +33,8 @@ contains
 
     subroutine assertEqualsWith(this, name, actual, expected, tol)
         class(tests), intent(inout) :: this
-        character(*), intent(in)    :: name
-        real(kind=RP), intent(in) :: actual, expected, tol
+        character(*), intent(in) :: name
+        real(kind = RP), intent(in) :: actual, expected, tol
 
         this%numTests = this%numTests + 1
         if ((actual - expected) .ge. tol) then
@@ -45,7 +45,7 @@ contains
 
     subroutine print(this)
         class(tests), intent(in) :: this
-        integer                  :: i
+        integer :: i
 
         if (this%numFailed .eq. 0) then
             print *, ""
@@ -65,10 +65,12 @@ contains
     end subroutine print
 
     subroutine end(this)
-        class(tests), intent(in) :: this
+        class(tests), intent(inout) :: this
 
         if (this%numFailed .ne. 0) then
+            deallocate(this%failedTests)
             error stop "There are failed tests."
         end if
     end subroutine end
+
 end module Testing
