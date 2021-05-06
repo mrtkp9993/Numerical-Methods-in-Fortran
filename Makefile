@@ -1,13 +1,13 @@
 COMPILER = gfortran
-FLAGS = -Wall -Wextra -Wconversion -O2 -fdefault-real-10
+FLAGS = -Wall -Wextra -Wconversion -O2 -fdefault-real-8
 
 SRC=src
 OBJ=obj
 BIN=bin
 
 EXEC = $(BIN)/main
-OBJS = Assert.o Constants.o Distributions.o \
-	   Plots.o Random.o Testing.o
+OBJS = Assert.o Commons.o Constants.o \
+	   Distributions.o Plots.o Random.o Testing.o
 
 all: $(SRC)/main.f90 $(OBJS)
 	$(COMPILER) $(FLAGS) -o $(EXEC) $(SRC)/main.f90 $(OBJS)
@@ -20,11 +20,14 @@ clean:
 
 Assert.o: $(SRC)/Assert.f90 Constants.o
 	$(COMPILER) $(FLAGS) -c $(SRC)/Assert.f90
-	
+
+Commons.o: $(SRC)/Commons.f90 Constants.o
+	$(COMPILER) $(FLAGS) -c $(SRC)/Commons.f90
+
 Constants.o: $(SRC)/Constants.f90
 	$(COMPILER) $(FLAGS) -c $(SRC)/Constants.f90
 
-Distributions.o: $(SRC)/Distributions.f90 Constants.o Random.o
+Distributions.o: $(SRC)/Distributions.f90 Commons.o Constants.o Random.o
 	$(COMPILER) $(FLAGS) -c $(SRC)/Distributions.f90
 
 Plots.o: $(SRC)/Plots.f90

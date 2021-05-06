@@ -1,7 +1,7 @@
 module Constants
     implicit none
 
-    integer, parameter :: RP = selected_real_kind(16)
+    integer, parameter :: RP = selected_real_kind(10)
 
     real(kind = RP), parameter :: C_E = 2.71828182845904523536
     real(kind = RP), parameter :: C_LOG2E = 1.44269504088896340760
