@@ -11,6 +11,7 @@ contains
     ! d -> PDF
     ! r -> Random number from dist.
 
+    ! uniform dist.
     real(kind = RP) function punif(x, a, b) result(prob)
         real(kind = RP), intent(in) :: x, a, b
         if (x .le. a) then
@@ -47,6 +48,7 @@ contains
         x = qunif(lcg(seed), a, b)
     end function runif
 
+    ! normal dist.
     real(kind = RP) function pnorm(x, mu, sigma) result(prob)
         real(kind = RP), intent(in) :: x, mu, sigma
         real(kind = RP) :: y
@@ -70,6 +72,7 @@ contains
         prob = exp(-0.5 * ((x-mu)/sigma)**2) / sqrt (2*C_PI*sigma*sigma)
     end function dnorm
 
+    ! Box-Muller algorithm for generating normal random numbers
     real(kind = RP) function rnorm(mu, sigma, seed) result(x)
         integer, intent(inout) :: seed
         real(kind = RP), intent(in) :: mu, sigma

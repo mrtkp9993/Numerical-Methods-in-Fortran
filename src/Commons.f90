@@ -4,6 +4,7 @@ module Commons
 
     contains
 
+        ! Approximation to Error function
         real(kind = RP) function erfun(x) result(y)
             real(kind = RP), intent(in) :: x
             real(kind = RP) :: xn
@@ -26,6 +27,7 @@ module Commons
                     * (1 - (a1*t + a2*t**2 + a3*t**3 + a4*t**4 + a5*t**5) * exp(-xn ** 2))
         end function erfun
 
+        ! Approximation to Inverse Error function
         real(kind = RP) function erfun_inv(x) result(y)
             real(kind = RP), intent(in) :: x
             real(kind = RP) :: a = 0.140012
@@ -37,6 +39,8 @@ module Commons
                             -((2/(C_PI*a)) + (log(1-x**2))/2))
         end function erfun_inv
 
+        ! Approximation to standard normal dist.
+        ! complementary cumulative distribution function
         ! Abramowitz and Stegun, Formula 26.2.23
         real(kind = RP) function ccdf(p) result(xp)
             real(kind = RP), intent(in) :: p
@@ -51,4 +55,5 @@ module Commons
             t = sqrt(-2.0*log(p))
             xp = t - ((c0 + c1*t + c2*t**2) / (1 + d1*t + d2*t**2 + d3*t**3))
         end function ccdf
+
 end module Commons

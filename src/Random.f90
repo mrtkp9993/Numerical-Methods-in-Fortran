@@ -4,6 +4,7 @@ module Random
 
 contains
 
+    ! Linear congruential generator
     real(kind = RP) function lcg(seed) result(randUnif)
         integer, intent(inout) :: seed
         integer :: mult, incr, modl
