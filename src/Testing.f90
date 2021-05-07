@@ -5,6 +5,8 @@ module Testing
     type Tests
         integer :: numTests, numFailed
         character(40), allocatable, dimension(:) :: failedTests
+        real(kind=RP), allocatable, dimension(:) :: failedTestsActual
+        real(kind=RP), allocatable, dimension(:) :: failedTestsExpctd
     contains
         procedure :: init
         procedure :: assertEquals, assertEqualsWith
@@ -15,6 +17,8 @@ contains
     subroutine init(this)
         class(Tests), intent(inout) :: this
         allocate(this%failedTests(0))
+        allocate(this%failedTestsActual(0))
+        allocate(this%failedTestsExpctd(0))
         this%numTests = 0
         this%numFailed = 0
     end subroutine init
@@ -28,6 +32,8 @@ contains
         if (actual .ne. expected) then
             this%numFailed = this%numFailed + 1
             this%failedTests = [this%failedTests, name]
+            this%failedTestsActual = [this%failedTestsActual, actual]
+            this%failedTestsExpctd = [this%failedTestsExpctd, expected]
         end if
     end subroutine assertEquals
 
@@ -40,6 +46,8 @@ contains
         if ((actual - expected) .ge. tol) then
             this%numFailed = this%numFailed + 1
             this%failedTests = [this%failedTests, name]
+            this%failedTestsActual = [this%failedTestsActual, actual]
+            this%failedTestsExpctd = [this%failedTestsExpctd, expected]
         end if
     end subroutine assertEqualsWith
 
@@ -58,7 +66,9 @@ contains
             print *, "Failed tests"
             print *, "------------"
             do i = 1, this%numFailed
-                print *, i, " ", this%failedTests(i)
+                print *, i, " ", this%failedTests(i), &
+                        "Actual: ", this%failedTestsActual(i), &
+                        "Expected: ", this%failedTestsExpctd(i)
             end do
             print *, ""
         end if
