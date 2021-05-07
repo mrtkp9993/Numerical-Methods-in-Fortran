@@ -5,8 +5,8 @@ module Testing
     type Tests
         integer :: numTests, numFailed
         character(40), allocatable, dimension(:) :: failedTests
-        real(kind=RP), allocatable, dimension(:) :: failedTestsActual
-        real(kind=RP), allocatable, dimension(:) :: failedTestsExpctd
+        real(DP), allocatable, dimension(:) :: failedTestsActual
+        real(DP), allocatable, dimension(:) :: failedTestsExpctd
     contains
         procedure :: init
         procedure :: assertEquals, assertEqualsWith
@@ -26,7 +26,7 @@ contains
     subroutine assertEquals(this, name, actual, expected)
         class(tests), intent(inout) :: this
         character(*), intent(in) :: name
-        real(kind = RP), intent(in) :: actual, expected
+        real(DP), intent(in) :: actual, expected
 
         this%numTests = this%numTests + 1
         if (actual .ne. expected) then
@@ -40,7 +40,7 @@ contains
     subroutine assertEqualsWith(this, name, actual, expected, tol)
         class(tests), intent(inout) :: this
         character(*), intent(in) :: name
-        real(kind = RP), intent(in) :: actual, expected, tol
+        real(DP), intent(in) :: actual, expected, tol
 
         this%numTests = this%numTests + 1
         if ((actual - expected) .ge. tol) then

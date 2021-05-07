@@ -5,7 +5,7 @@ module Assert
 contains
     ! TODO Change functions to throw error
     logical function assertEquals(actual, expected) result(equal)
-        real(kind = RP), intent(in) :: actual, expected
+        real(DP), intent(in) :: actual, expected
 
         if (actual .eq. expected) then
             equal = .true.
@@ -16,7 +16,7 @@ contains
 
     ! TODO Change functions to throw error
     logical function assertEqualsWith(actual, expected, tol) result(equal)
-        real(kind = RP), intent(in) :: actual, expected, tol
+        real(DP), intent(in) :: actual, expected, tol
 
         if ((actual - expected) .le. tol) then
             equal = .true.

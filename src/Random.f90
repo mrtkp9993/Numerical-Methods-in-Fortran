@@ -5,14 +5,14 @@ module Random
 contains
 
     ! Linear congruential generator
-    real(kind = RP) function lcg(seed) result(randUnif)
+    real(DP) function lcg(seed) result(randUnif)
         integer, intent(inout) :: seed
         integer :: mult, incr, modl
         mult = 1103515245
         incr = 12345
         modl = 2**32
         seed = modulo(mult * seed + incr, modl)
-        randUnif = seed / real(modl, kind = RP)
+        randUnif = seed / real(modl, kind=DP)
     end function lcg
 
 end module Random

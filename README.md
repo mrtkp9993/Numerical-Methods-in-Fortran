@@ -1,7 +1,3 @@
-NOT USE FOR PRODUCTION&RESEARCH YET!
-
----
-
 # Numerical Methods in Fortran
 
 [![CI](https://github.com/mrtkp9993/Numerical-Methods-in-Fortran/actions/workflows/main.yml/badge.svg)](https://github.com/mrtkp9993/Numerical-Methods-in-Fortran/actions/workflows/main.yml) [![GitHub license](https://img.shields.io/github/license/mrtkp9993/Numerical-Methods-in-Fortran)](https://github.com/mrtkp9993/Numerical-Methods-in-Fortran/blob/main/LICENSE) 
