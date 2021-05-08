@@ -81,4 +81,46 @@ contains
         x = mu + sigma * x
     end function rnorm
 
+    ! gamma dist.
+    ! Marsaglia-Tsang method
+    real(DP) function marsaglia_tsang(a, seed) result (y)
+        integer, intent(inout) :: seed
+        real(DP), intent(in) :: a
+        real(DP) :: d, c, x, v, u
+
+        d = a - 1.0_dp/3.0_dp
+        c = 1.0_dp / sqrt(9.0_dp*d)
+        do
+            v = 0.0_dp
+            do while(v .le. 0.0_dp)
+                x = rnorm(0.0, 1.0, seed)
+                v = 1.0_dp + c * x
+            end do
+            v = v**3
+            u = runif(0.0,1.0, seed)
+            if (u .lt. 1.0_dp - 0.0331*(x**2)*(x**2)) then
+                y = d*v
+                exit
+            end if
+            if (log(u) .lt. 0.5*x*x+d*(1.0_dp-v+log(v))) then
+                y = d*v
+                exit
+            end if
+        end do
+    end function marsaglia_tsang
+
+    ! generate gamma random numbers
+    real(DP) function rgamma(alpha, beta, seed) result(x)
+        integer, intent(inout) :: seed
+        real(DP), intent(in) :: alpha, beta
+        real(DP) :: ms
+        if (alpha .gt. 1.0) then
+            ms = marsaglia_tsang(alpha, seed)
+            x = ms / beta
+        else
+            ms = marsaglia_tsang(alpha+1.0_dp, seed)
+            x = ms*(runif(0.0,1.0,seed)**(1.0_dp/alpha))/beta
+        end if
+    end function rgamma
+
 end module Distributions
