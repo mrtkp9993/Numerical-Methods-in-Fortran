@@ -86,6 +86,18 @@ contains
         x = c / (c + d)
     end function rbeta
 
+    ! f dist.
+    real(DP) function rf(d1, d2, seed) result(x)
+        integer, intent(inout) :: seed
+        integer, intent(in) :: d1, d2
+        real(DP) :: bx
+        if (d1 .lt. 0 .or. d2 .lt. 0) then
+            error stop "Parameters must be strictly positive."
+        end if
+        bx = rbeta(d1/2.0_dp, d2/2.0_dp, seed)
+        x = (d2 * bx) / (d1 * (1 - bx))
+    end function rf
+
     ! exponential dist.
     real(DP) function rexp(lambda, seed) result(x)
         integer, intent(inout) :: seed
@@ -96,5 +108,61 @@ contains
 
         x = -log(runif(0.0_dp, 1.0_dp, seed)) / lambda
     end function rexp
+
+    ! binomial dist.
+    integer function rbinom(n, a, seed) result(k)
+        integer, intent(inout) :: seed
+        integer, intent(in)  :: n
+        real(DP), intent(in) :: a
+        real(DP) :: p, u
+        integer :: b, i
+        k = 0
+
+        if (a .lt. 0 .or. a .gt. 1) then
+            error stop "p must be in [0,1]."
+        end if
+
+        if (a .le. 0.5_dp) then
+            p = a
+        else
+            p = 1.0_dp-a
+        end if
+        u = runif(0.0_dp, 1.0_dp, seed)
+        do i = 1, n
+            if (u .gt. (1.0_dp-p)) then
+                b = 1
+            else
+                b = 0
+            end if
+            u = (u-(1.0_dp-p)*b) / (p*b+(1.0_dp-p)*(1-b))
+            k = k + b
+        end do
+
+        if (a .gt. 0.5) then
+            k = n-k
+        end if
+    end function rbinom
+
+    ! Poisson dist.
+    ! http://luc.devroye.org/chapter_ten.pdf
+    real(DP) function rpois(lambda, seed) result(x)
+        integer, intent(inout) :: seed
+        real(DP), intent(in) :: lambda
+        real(DP) :: prod, sum, u
+
+        if (lambda .lt. 0) then
+            error stop "lambda must be strictly positive."
+        end if
+
+        x = 0
+        sum = exp(-lambda)
+        prod = exp(-lambda)
+        u = runif(0.0_dp, 1.0_dp, seed)
+        do while(u .gt. sum)
+            x = x + 1
+            prod = (lambda / x) * prod
+            sum = sum + prod
+        end do
+    end function rpois
 
 end module Distributions
