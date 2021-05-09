@@ -19,6 +19,9 @@ contains
         integer, intent(inout) :: seed
         real(DP), intent(in) :: mu, sigma
         real(DP) :: u1, u2
+        if (sigma .lt. 0) then
+            error stop "Sigma^2 must be strictly positive."
+        end if
         u1 = runif(0.0_dp, 1.0_dp, seed)
         u2 = runif(0.0_dp, 1.0_dp, seed)
         x = sqrt(-2.0_dp*log(u1)) * cos(2.0_dp*C_PI*u2)
@@ -58,6 +61,9 @@ contains
         integer, intent(inout) :: seed
         real(DP), intent(in) :: alpha, beta
         real(DP) :: ms
+        if (alpha .lt. 0 .or. beta .lt. 0) then
+            error stop "Parameters must be strictly positive."
+        end if
         if (alpha .gt. 1.0) then
             ms = marsaglia_tsang(alpha, seed)
             x = ms / beta
@@ -72,7 +78,9 @@ contains
         integer, intent(inout) :: seed
         real(DP), intent(in) :: alpha, beta
         real(DP) :: c, d
-
+        if (alpha .lt. 0 .or. beta .lt. 0) then
+            error stop "Parameters must be strictly positive."
+        end if
         c = rgamma(alpha, 1.0, seed)
         d = rgamma(beta, 1.0, seed)
         x = c / (c + d)
@@ -82,6 +90,9 @@ contains
     real(DP) function rexp(lambda, seed) result(x)
         integer, intent(inout) :: seed
         real(DP), intent(in) :: lambda
+        if (lambda .lt. 0) then
+            error stop "Lambda must be strictly positive."
+        end if
 
         x = -log(runif(0.0_dp, 1.0_dp, seed)) / lambda
     end function rexp
