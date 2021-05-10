@@ -1,11 +1,12 @@
 program main_random
+    use Commons
     use Constants
     use Distributions
     use IO
     use Random
     implicit none
 
-    real(dp), dimension(1000000,8) :: randomData
+    real(dp), dimension(1000000,10) :: randomData
     integer :: i, seed
     character(40) :: fileName
     fileName = "data.csv"
@@ -22,6 +23,7 @@ program main_random
         randomData(i,6) = rbinom(20, 0.7_dp, seed)
         randomData(i,7) = rf(5, 2, seed)
         randomData(i,8) = rpois(4.0_dp, seed)
+        randomData(i,9) = rgeom(0.5_dp, seed)
     end do
 
     call writeCsv(randomData, fileName)
