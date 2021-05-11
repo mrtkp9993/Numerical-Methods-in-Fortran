@@ -19,6 +19,9 @@ plot: $(SRC)/main_plot.f90 $(OBJS)
 random: $(SRC)/main_random.f90 $(OBJS)
 	$(COMPILER) $(FLAGS) -o $(EXEC) $(SRC)/main_random.f90 $(OBJS)
 
+library: $(OBJS)
+	$(COMPILER) $(FLAGS) -shared -o NumericalFortran.dylib $(OBJS)
+
 clean:
 	rm -rf $(BIN)/main $(BIN)/main.dSYM *.mod *.o
 

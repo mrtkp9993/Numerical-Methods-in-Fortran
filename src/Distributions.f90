@@ -27,7 +27,7 @@ contains
     ! binomial dist.
     integer function rbinom(n, a, seed) result(k)
         integer, intent(inout) :: seed
-        integer, intent(in)  :: n
+        integer, intent(in) :: n
         real(DP), intent(in) :: a
         real(DP) :: p, u
         integer :: b, i
@@ -40,21 +40,21 @@ contains
         if (a .le. 0.5_dp) then
             p = a
         else
-            p = 1.0_dp-a
+            p = 1.0_dp - a
         end if
         u = runif(0.0_dp, 1.0_dp, seed)
         do i = 1, n
-            if (u .gt. (1.0_dp-p)) then
+            if (u .gt. (1.0_dp - p)) then
                 b = 1
             else
                 b = 0
             end if
-            u = (u-(1.0_dp-p)*b) / (p*b+(1.0_dp-p)*(1-b))
+            u = (u - (1.0_dp - p) * b) / (p * b + (1.0_dp - p) * (1 - b))
             k = k + b
         end do
 
         if (a .gt. 0.5) then
-            k = n-k
+            k = n - k
         end if
     end function rbinom
 
@@ -77,7 +77,7 @@ contains
         if (d1 .lt. 0 .or. d2 .lt. 0) then
             error stop "Parameters must be strictly positive."
         end if
-        bx = rbeta(d1/2.0_dp, d2/2.0_dp, seed)
+        bx = rbeta(d1 / 2.0_dp, d2 / 2.0_dp, seed)
         x = (d2 * bx) / (d1 * (1 - bx))
     end function rf
 
@@ -88,8 +88,8 @@ contains
         real(DP), intent(in) :: a
         real(DP) :: d, c, x, v, u
 
-        d = a - 1.0_dp/3.0_dp
-        c = 1.0_dp / sqrt(9.0_dp*d)
+        d = a - 1.0_dp / 3.0_dp
+        c = 1.0_dp / sqrt(9.0_dp * d)
         do
             v = 0.0_dp
             do while(v .le. 0.0_dp)
@@ -97,13 +97,13 @@ contains
                 v = 1.0_dp + c * x
             end do
             v = v**3
-            u = runif(0.0,1.0, seed)
-            if (u .lt. 1.0_dp - 0.0331*(x**2)*(x**2)) then
-                y = d*v
+            u = runif(0.0, 1.0, seed)
+            if (u .lt. 1.0_dp - 0.0331 * (x**2) * (x**2)) then
+                y = d * v
                 exit
             end if
-            if (log(u) .lt. 0.5*x*x+d*(1.0_dp-v+log(v))) then
-                y = d*v
+            if (log(u) .lt. 0.5 * x * x + d * (1.0_dp - v + log(v))) then
+                y = d * v
                 exit
             end if
         end do
@@ -121,8 +121,8 @@ contains
             ms = marsaglia_tsang(alpha, seed)
             x = ms / beta
         else
-            ms = marsaglia_tsang(alpha+1.0_dp, seed)
-            x = ms*(runif(0.0,1.0,seed)**(1.0_dp/alpha))/beta
+            ms = marsaglia_tsang(alpha + 1.0_dp, seed)
+            x = ms * (runif(0.0, 1.0, seed)**(1.0_dp / alpha)) / beta
         end if
     end function rgamma
 
@@ -153,7 +153,7 @@ contains
         end if
         u1 = runif(0.0_dp, 1.0_dp, seed)
         u2 = runif(0.0_dp, 1.0_dp, seed)
-        x = sqrt(-2.0_dp*log(u1)) * cos(2.0_dp*C_PI*u2)
+        x = sqrt(-2.0_dp * log(u1)) * cos(2.0_dp * C_PI * u2)
         x = mu + sigma * x
     end function rnorm
 
@@ -178,6 +178,15 @@ contains
             sum = sum + prod
         end do
     end function rpois
+
+    ! t dist.
+    real(DP) function rt(v, seed) result(x)
+        integer, intent(inout) :: seed
+        integer, intent(in) :: v
+        real(DP) :: s2
+        s2 = 1.0_dp / rgamma(v / 2.0_dp, v / 2.0_dp, seed)
+        x = rnorm(0.0_dp, sqrt(s2), seed)
+    end function rt
 
     ! uniform dist.
     real(DP) function runif(a, b, seed) result(x)

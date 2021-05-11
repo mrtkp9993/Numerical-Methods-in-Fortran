@@ -12,7 +12,7 @@ contains
         incr = 12345
         modl = 2**32
         seed = modulo(mult * seed + incr, modl)
-        randUnif = seed / real(modl, kind=DP)
+        randUnif = seed / real(modl, kind = DP)
     end function lcg
 
 end module Random
