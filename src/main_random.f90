@@ -27,7 +27,6 @@ program main_random
         randomData(i, 10) = roundNearN(rt(5, seed), 8)
         randomData(i, 11) = roundNearN(rcauchy(-2.0_dp, 1.0_dp, seed), 8)
         randomData(i, 12) = roundNearN(rlognormal(4.0_dp, 0.3_dp, seed), 8)
-        randomData(i, 13) = roundNearN(rpareto(3.0_dp, 0.2_dp, seed), 8)
     end do
 
     call writeCsv(randomData, fileName)
