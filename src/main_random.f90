@@ -6,7 +6,7 @@ program main_random
     use Random
     implicit none
 
-    real(dp), dimension(1000000, 13) :: randomData
+    real(dp), dimension(1000000, 12) :: randomData
     integer :: i, seed
     character(40) :: fileName
     fileName = "data.csv"
