@@ -16,7 +16,7 @@ contains
         integer, intent(inout) :: seed
         real(DP), intent(in) :: alpha, beta
         real(DP) :: c, d
-        if (alpha .lt. 0 .or. beta .lt. 0) then
+        if (alpha .le. 0 .or. beta .le. 0) then
             error stop "Parameters must be strictly positive."
         end if
         c = rgamma(alpha, 1.0, seed)
@@ -58,11 +58,25 @@ contains
         end if
     end function rbinom
 
+    ! Cauchy dist.
+    ! https://math.stackexchange.com/questions/484395/how-to-generate-a-cauchy-random-variable
+    real(DP) function rcauchy(x0, gamma, seed) result(x)
+        integer, intent(inout) :: seed
+        real(DP), intent(in) :: x0, gamma
+
+        if (gamma .le. 0) then
+            error stop "Lambda must be strictly positive."
+        end if
+
+        x = gamma * tan(C_PI * (runif(0.0_dp, 1.0_dp, seed) - 0.5_dp)) + x0;
+
+    end function rcauchy
+
     ! exponential dist.
     real(DP) function rexp(lambda, seed) result(x)
         integer, intent(inout) :: seed
         real(DP), intent(in) :: lambda
-        if (lambda .lt. 0) then
+        if (lambda .le. 0) then
             error stop "Lambda must be strictly positive."
         end if
 
@@ -74,7 +88,7 @@ contains
         integer, intent(inout) :: seed
         integer, intent(in) :: d1, d2
         real(DP) :: bx
-        if (d1 .lt. 0 .or. d2 .lt. 0) then
+        if (d1 .le. 0 .or. d2 .le. 0) then
             error stop "Parameters must be strictly positive."
         end if
         bx = rbeta(d1 / 2.0_dp, d2 / 2.0_dp, seed)
@@ -114,7 +128,7 @@ contains
         integer, intent(inout) :: seed
         real(DP), intent(in) :: alpha, beta
         real(DP) :: ms
-        if (alpha .lt. 0 .or. beta .lt. 0) then
+        if (alpha .le. 0 .or. beta .le. 0) then
             error stop "Parameters must be strictly positive."
         end if
         if (alpha .gt. 1.0) then
@@ -148,7 +162,7 @@ contains
         integer, intent(inout) :: seed
         real(DP), intent(in) :: mu, sigma
         real(DP) :: u1, u2
-        if (sigma .lt. 0) then
+        if (sigma .le. 0) then
             error stop "Sigma^2 must be strictly positive."
         end if
         u1 = runif(0.0_dp, 1.0_dp, seed)
@@ -164,7 +178,7 @@ contains
         real(DP), intent(in) :: lambda
         real(DP) :: prod, sum, u
 
-        if (lambda .lt. 0) then
+        if (lambda .le. 0) then
             error stop "lambda must be strictly positive."
         end if
 
@@ -187,6 +201,11 @@ contains
         integer, intent(inout) :: seed
         integer, intent(in) :: v
         real(DP) :: s2
+
+        if (v .le. 0) then
+            error stop "Degress of freedom must be strictly positive."
+        end if
+
         s2 = 1.0_dp / rgamma(v / 2.0_dp, v / 2.0_dp, seed)
         x = rnorm(0.0_dp, sqrt(s2), seed)
     end function rt
