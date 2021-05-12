@@ -56,4 +56,11 @@ contains
         xp = t - ((c0 + c1 * t + c2 * t**2) / (1.0_dp + d1 * t + d2 * t**2 + d3 * t**3))
     end function ccdf
 
+    ! round nearest to n digits
+    real(DP) function roundNearN(x, n) result(y)
+        real(DP), intent(in) :: x
+        integer, intent(in) :: n
+        y = anint(x * 10**n) / 10**n
+    end function roundNearN
+
 end module Commons

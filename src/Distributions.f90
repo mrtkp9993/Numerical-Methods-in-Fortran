@@ -156,6 +156,16 @@ contains
         end do
     end function rgeom
 
+    ! log-normal dist.
+    real(DP) function rlognormal(mu, sigma, seed) result(x)
+        integer, intent(inout) :: seed
+        real(DP), intent(in) :: mu, sigma
+        if (sigma .le. 0) then
+            error stop "Sigma^2 must be strictly positive."
+        end if
+        x = exp(rnorm(mu, sigma, seed))
+    end function rlognormal
+
     ! normal dist.
     ! Box-Muller algorithm for generating normal random numbers
     real(DP) function rnorm(mu, sigma, seed) result(x)
@@ -173,7 +183,7 @@ contains
 
     ! Poisson dist.
     ! http://luc.devroye.org/chapter_ten.pdf
-    real(DP) function rpois(lambda, seed) result(x)
+    integer function rpois(lambda, seed) result(x)
         integer, intent(inout) :: seed
         real(DP), intent(in) :: lambda
         real(DP) :: prod, sum, u
