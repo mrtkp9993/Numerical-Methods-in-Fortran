@@ -180,6 +180,9 @@ contains
     end function rpois
 
     ! t dist.
+    ! sources:
+    ! 1. https://stats.stackexchange.com/questions/52906/student-t-as-mixture-of-gaussian/59520#59520
+    ! 2. https://stats.stackexchange.com/questions/70266/generating-random-numbers-from-a-t-distribution/70283#70283
     real(DP) function rt(v, seed) result(x)
         integer, intent(inout) :: seed
         integer, intent(in) :: v
