@@ -7,7 +7,8 @@ BIN=bin
 
 EXEC = $(BIN)/main
 OBJS = Assert.o Commons.o Constants.o \
-	   Distributions.o IO.o Plots.o  \
+	   Distributions.o IO.o LinearAlgebra.o \
+	   Plots.o  \
 	   Random.o Testing.o
 
 all: $(SRC)/main.f90 $(OBJS)
@@ -36,6 +37,9 @@ Constants.o: $(SRC)/Constants.f90
 
 IO.o: $(SRC)/IO.f90
 	$(COMPILER) $(FLAGS) -c $(SRC)/IO.f90
+
+LinearAlgebra.o: $(SRC)/LinearAlgebra.f90 Constants.o
+	$(COMPILER) $(FLAGS) -c $(SRC)/LinearAlgebra.f90
 
 Distributions.o: $(SRC)/Distributions.f90 Commons.o Constants.o Random.o
 	$(COMPILER) $(FLAGS) -c $(SRC)/Distributions.f90

@@ -3,6 +3,14 @@ module IO
 
 contains
 
+    subroutine printMatrix(matrix)
+        real, dimension(:, :), intent(in) :: matrix
+        integer :: i
+        do i = 1, size(matrix, 1)
+            write (*, '(*(F16.8, ","))') matrix(i, :)
+        end do
+    end subroutine printMatrix
+
     subroutine writeCsv(data, fileName)
         real, dimension(:, :), intent(in) :: data
         character(*), intent(in) :: fileName

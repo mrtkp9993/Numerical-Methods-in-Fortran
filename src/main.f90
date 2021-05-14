@@ -3,6 +3,8 @@ program main
     use Commons
     use Constants
     use Distributions
+    use IO
+    use LinearAlgebra
     use Random
     use Testing
     implicit none
@@ -14,8 +16,18 @@ program main
     real(DP) :: r1 = C_E**C_PI - C_PI
     real(DP) :: e1 = 19.999099979189475767_dp
 
-    integer :: seed
-    seed = time()
+    real(DP), dimension(3, 3) :: matrix = reshape( (/ 60, 30, 20, &
+                                                      30, 20, 15, &
+                                                      20, 15, 12 /), &
+                                                   shape(matrix), order=(/2, 1/))
+    real(DP), allocatable, dimension(:, :) :: l,u
+
+    call LUDecomposition(matrix, l, u)
+    print *, "L: "
+    call printMatrix(l) ! tests will be added later
+    print *, ""
+    print *, "U: "
+    call printMatrix(u) ! tests will be added later
 
     call tester%init()
 
