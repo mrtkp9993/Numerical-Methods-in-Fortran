@@ -9,7 +9,7 @@ module Testing
         real(DP), allocatable, dimension(:) :: failedTestsExpctd
     contains
         procedure :: init
-        procedure :: assertEquals, assertEqualsWith
+        procedure :: assertEquals, assertEqualsWith, assertTrue
         procedure :: print
         procedure :: end
     end type Tests
@@ -50,6 +50,20 @@ contains
             this%failedTestsExpctd = [this%failedTestsExpctd, expected]
         end if
     end subroutine assertEqualsWith
+
+    subroutine assertTrue(this, name, actual)
+        class(tests), intent(inout) :: this
+        character(*), intent(in) :: name
+        logical, intent(in) :: actual
+
+        this%numTests = this%numTests + 1
+        if (.not. actual) then
+            this%numFailed = this%numFailed + 1
+            this%failedTests = [this%failedTests, name]
+            this%failedTestsActual = [this%failedTestsActual, 1.0_dp]
+            this%failedTestsExpctd = [this%failedTestsExpctd, 0.0_dp]
+        end if
+    end subroutine assertTrue
 
     subroutine print(this)
         class(tests), intent(in) :: this
