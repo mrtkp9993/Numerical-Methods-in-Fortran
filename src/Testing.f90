@@ -43,7 +43,7 @@ contains
         real(DP), intent(in) :: actual, expected, tol
 
         this%numTests = this%numTests + 1
-        if ((actual - expected) .ge. tol) then
+        if (abs(actual - expected) .ge. tol) then
             this%numFailed = this%numFailed + 1
             this%failedTests = [this%failedTests, name]
             this%failedTestsActual = [this%failedTestsActual, actual]

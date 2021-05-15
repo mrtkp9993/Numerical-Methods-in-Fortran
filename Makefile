@@ -9,7 +9,7 @@ EXEC = $(BIN)/main
 OBJS = Assert.o Commons.o Constants.o \
 	   Distributions.o IO.o LinearAlgebra.o \
 	   Plots.o  \
-	   Random.o Testing.o
+	   Random.o RootFinding.o Testing.o
 
 all: $(SRC)/main.f90 $(OBJS)
 	$(COMPILER) $(FLAGS) -o $(EXEC) $(SRC)/main.f90 $(OBJS)
@@ -49,6 +49,9 @@ Plots.o: $(SRC)/Plots.f90
 
 Random.o: $(SRC)/Random.f90 Constants.o
 	$(COMPILER) $(FLAGS) -c $(SRC)/Random.f90
+
+RootFinding.o: $(SRC)/RootFinding.f90 Constants.o
+	$(COMPILER) $(FLAGS) -c $(SRC)/RootFinding.f90
 
 Testing.o: $(SRC)/Testing.f90 Assert.o Constants.o
 	$(COMPILER) $(FLAGS) -c $(SRC)/Testing.f90
