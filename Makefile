@@ -1,5 +1,7 @@
 COMPILER = gfortran
-FLAGS = -Wall -Wextra -Wconversion -O2 -fdefault-real-16 -freal-8-real-16 -fdefault-integer-8
+FLAGS = -Wall -Wextra -Wconversion \
+		-O2 -fdefault-real-16 -freal-8-real-16 \
+		-fdefault-integer-8
 
 SRC=src
 OBJ=obj
@@ -24,7 +26,7 @@ library: $(OBJS)
 	$(COMPILER) $(FLAGS) -shared -o NumericalFortran.dylib $(OBJS)
 
 clean:
-	rm -rf $(BIN)/main $(BIN)/main.dSYM *.mod *.o
+	rm -rf $(BIN)/main $(BIN)/main.dSYM *.mod *.o *.gcno *.gcda *.info
 
 Assert.o: $(SRC)/Assert.f90 Constants.o
 	$(COMPILER) $(FLAGS) -c $(SRC)/Assert.f90

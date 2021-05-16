@@ -22,7 +22,13 @@ program main
                                                       30, 20, 15, &
                                                       20, 15, 12 /), &
                                                    shape(m1), order=(/2, 1/))
-    real(DP), allocatable, dimension(:, :) :: l1,u1,l2
+    real(DP), dimension(3, 3) :: a = reshape( (/ 0.0_dp, 1.0_dp, 2.0_dp, &
+                                                 2.0_dp, 1.0_dp, 4.0_dp, &
+                                                 2.0_dp, 4.0_dp, 6.0_dp /), &
+                                               shape(a), order=(/2, 1/))
+    real(DP), dimension(3) :: b = (/4.0_dp, 3.0_dp, 7.0_dp/)
+    real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1
+    real(DP), allocatable, dimension(:) :: x
 
     real(DP) :: p00, p01, res1, p10, p11, res2
     integer :: nmax = 100
@@ -38,6 +44,8 @@ program main
 
     call ludcmp(m1, l1, u1)
     call cholesky(m1, l2)
+    call gauss(a, b, x)
+    call minor_matrix(a, 1, 3, rr1)
 
     call tester%init()
 
