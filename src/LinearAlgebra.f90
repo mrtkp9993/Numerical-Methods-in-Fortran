@@ -28,6 +28,87 @@ contains
 
     end subroutine cholesky
 
+    subroutine determinant2(matrix, det)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), intent(inout) :: det
+        integer :: m, n
+
+        m = size(matrix, 1)
+        n = size(matrix, 2)
+
+        if (m .ne. 2 .or. n .ne. 2) then
+            print *, "Dimensions must be equal to 2!"
+            stop
+        end if
+
+        det = matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)
+
+    end subroutine determinant2
+
+    subroutine determinant3(matrix, det)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), intent(inout) :: det
+        real(DP), allocatable, dimension(:, :) :: min1, min2, min3
+        real(DP) :: det1, det2, det3
+        integer :: m, n
+
+        m = size(matrix, 1)
+        n = size(matrix, 2)
+
+        if (m .ne. 3 .or. n .ne. 3) then
+            print *, "Dimensions must be equal to 3!"
+            stop
+        end if
+
+        call minor_matrix(matrix, 1, 1, min1)
+        call minor_matrix(matrix, 1, 2, min2)
+        call minor_matrix(matrix, 1, 3, min3)
+        call determinant2(min1, det1)
+        call determinant2(min2, det2)
+        call determinant2(min3, det3)
+
+        det = matrix(1, 1) * det1 - matrix(1, 2) * det2 + matrix(1, 3) * det3
+
+    end subroutine determinant3
+
+    subroutine determinant(matrix, det)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), intent(inout) :: det
+        real(DP), allocatable, dimension(:, :) :: lm, um
+        real(DP) :: lmdet, umdet
+        integer :: m, n, i
+
+        m = size(matrix, 1)
+
+        if (m .eq. 2) then
+            call determinant2(matrix, det)
+            return
+        end if
+
+        if (m .eq. 3) then
+            call determinant3(matrix, det)
+            return
+        end if
+
+        n = size(matrix, 2)
+        if (m .ne. n) then
+            print *, "Dimensions must match!"
+            stop
+        end if
+
+        call ludcmp(matrix, lm, um)
+
+        lmdet = 1.0_dp
+        umdet = 1.0_dp
+        do i = 1, n
+            lmdet = lmdet * lm(i, i)
+            umdet = umdet * um(i, i)
+        end do
+
+        det = lmdet * umdet;
+
+    end subroutine determinant
+
     subroutine gauss(a, b, x)
         real(DP), dimension(:, :), intent(in) :: a
         real(DP), dimension(:), intent(in) :: b
