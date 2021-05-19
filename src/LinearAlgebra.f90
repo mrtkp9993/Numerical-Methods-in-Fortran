@@ -13,8 +13,7 @@ contains
         n = size(matrix, 2)
 
         if (m .ne. n) then
-            print *, "Input matrix must be a square matrix."
-            stop
+            error stop "Input matrix must be a square matrix."
         end if
 
         if (.not. allocated(l)) allocate(l(n, n))
@@ -39,8 +38,7 @@ contains
         n = size(matrix, 2)
 
         if (m .ne. n) then
-            print *, "Input matrix must be a square matrix."
-            stop
+            error stop "Input matrix must be a square matrix."
         end if
 
         if (.not. allocated(cof)) allocate(cof(m, n))
@@ -64,8 +62,7 @@ contains
         n = size(matrix, 2)
 
         if (m .ne. 2 .or. n .ne. 2) then
-            print *, "Dimensions must be equal to 2!"
-            stop
+            error stop "Dimensions must be equal to 2!"
         end if
 
         det = matrix(1,1)*matrix(2,2) - matrix(1,2)*matrix(2,1)
@@ -83,8 +80,7 @@ contains
         n = size(matrix, 2)
 
         if (m .ne. 3 .or. n .ne. 3) then
-            print *, "Dimensions must be equal to 3!"
-            stop
+            error stop "Dimensions must be equal to 3!"
         end if
 
         call minorMatrix(matrix, 1, 1, min1)
@@ -119,8 +115,7 @@ contains
 
         n = size(matrix, 2)
         if (m .ne. n) then
-            print *, "Dimensions must match!"
-            stop
+            error stop "Dimensions must match!"
         end if
 
         call ludcmp(matrix, lm, um)
@@ -152,8 +147,7 @@ contains
         m2 = size(b, 1)
 
         if (m1 .ne. m2) then
-            print *, "Dimensions must match!"
-            stop
+            error stop "Dimensions must match!"
         end if
 
         n = m1
@@ -247,8 +241,7 @@ contains
         n = size(matrix, 2)
 
         if (m .ne. n) then
-            print *, "Input matrix must be a square matrix."
-            stop
+            error stop "Input matrix must be a square matrix."
         end if
 
         if (.not. allocated(l)) allocate(l(n, n))
