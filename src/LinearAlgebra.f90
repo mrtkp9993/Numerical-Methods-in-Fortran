@@ -17,7 +17,7 @@ contains
             stop
         end if
 
-        allocate(l(n, n))
+        if (.not. allocated(l)) allocate(l(n, n))
 
         do k = 1, n
             l(k, k) = sqrt(matrix(k, k) - sum((/(l(k, s) * l(k, s), s = 1, k - 1)/)))
@@ -27,6 +27,33 @@ contains
         end do
 
     end subroutine cholesky
+
+    subroutine cofactor(matrix, cof)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), allocatable, dimension(:, :), intent(inout) :: cof
+        real(DP), allocatable, dimension(:, :) :: minor
+        real(DP) :: det
+        integer :: i, j, m, n
+
+        m = size(matrix, 1)
+        n = size(matrix, 2)
+
+        if (m .ne. n) then
+            print *, "Input matrix must be a square matrix."
+            stop
+        end if
+
+        if (.not. allocated(cof)) allocate(cof(m, n))
+
+        do i = 1, m
+            do j = 1, n
+                call minor_matrix(matrix, i, j, minor)
+                call determinant(minor, det)
+                cof(i, j) = (-1) ** (i + j) * det
+            end do
+        end do
+
+    end subroutine cofactor
 
     subroutine determinant2(matrix, det)
         real(DP), dimension(:, :), intent(in) :: matrix
@@ -130,10 +157,10 @@ contains
         end if
 
         n = m1
-        allocate(s(n))
-        allocate(a_copy(n,n))
-        allocate(b_copy(n))
-        allocate(x(n))
+        if (.not. allocated(s)) allocate(s(n))
+        if (.not. allocated(a_copy)) allocate(a_copy(n,n))
+        if (.not. allocated(b_copy)) allocate(b_copy(n))
+        if (.not. allocated(x)) allocate(x(n))
         a_copy = a
         b_copy = b
 
@@ -189,6 +216,28 @@ contains
         end do
     end subroutine gauss
 
+    subroutine inverse(matrix, inv)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), allocatable, dimension(:, :), intent(inout) :: inv
+        real(DP), allocatable, dimension(:, :) :: cof, trs
+        real(DP) :: det
+        integer :: m, n
+
+        m = size(matrix, 1)
+        n = size(matrix, 2)
+
+        if (.not. allocated(inv)) allocate(inv(m, n))
+        allocate(cof(m,n))
+        allocate(trs(m,n))
+
+        call determinant(matrix, det)
+        call cofactor(matrix, cof)
+        call transpose(cof, trs)
+
+        inv = 1.0_dp / det * trs
+
+    end subroutine inverse
+
     subroutine ludcmp(matrix, l, u)
         real(DP), dimension(:, :), intent(in) :: matrix
         real(DP), allocatable, dimension(:, :), intent(inout) :: l, u
@@ -202,8 +251,8 @@ contains
             stop
         end if
 
-        allocate(l(n, n))
-        allocate(u(n, n))
+        if (.not. allocated(l)) allocate(l(n, n))
+        if (.not. allocated(u)) allocate(u(n, n))
 
         do k = 1, n
             l(k, k) = 1.0_dp
@@ -224,7 +273,7 @@ contains
 
         m = size(matrix, 1)
         n = size(matrix, 2)
-        allocate(res(m-1, n-1))
+        if (.not. allocated(res)) allocate(res(m-1, n-1))
 
         do ii = 1, m
             do jj = 1, n
@@ -240,5 +289,22 @@ contains
             end do
         end do
     end subroutine
+
+    subroutine transpose(matrix, trs)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), allocatable, dimension(:, :), intent(inout) :: trs
+        integer :: i, j, m, n
+
+        m = size(matrix, 1)
+        n = size(matrix, 2)
+        if (.not. allocated(trs)) allocate(trs(m, n))
+
+        do i = 1, m
+            do j = 1, n
+                trs(i, j) = matrix(j, i)
+            end do
+        end do
+
+    end subroutine transpose
 
 end module LinearAlgebra
