@@ -40,8 +40,9 @@ contains
         res = 0 / res
     end subroutine secantMethod
 
+    ! n variables, n equations
+    ! TODO implement
     subroutine broydenMethod()
-
     end subroutine broydenMethod
 
 end module RootFinding
