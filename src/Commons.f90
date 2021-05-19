@@ -28,7 +28,7 @@ contains
     end function erfun
 
     ! Approximation to Inverse Error function
-    real(DP) function erfun_inv(x) result(y)
+    real(DP) function erfunInv(x) result(y)
         real(DP), intent(in) :: x
         real(DP) :: a = 0.140012_dp
 
@@ -37,7 +37,7 @@ contains
                         sqrt(((2.0_dp / (C_PI * a) + (log(1.0_dp - x**2)) / 2.0_dp)**2) &
                                 - (log(1.0_dp - x**2)) / a)                          &
                                 - ((2.0_dp / (C_PI * a)) + (log(1.0_dp - x**2)) / 2.0_dp))
-    end function erfun_inv
+    end function erfunInv
 
     ! Approximation to standard normal dist.
     ! complementary cumulative distribution function

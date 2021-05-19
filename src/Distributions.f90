@@ -97,7 +97,7 @@ contains
 
     ! gamma dist.
     ! Marsaglia-Tsang method
-    real(DP) function marsaglia_tsang(a, seed) result (y)
+    real(DP) function marsagliaTsang(a, seed) result (y)
         integer, intent(inout) :: seed
         real(DP), intent(in) :: a
         real(DP) :: d, c, x, v, u
@@ -121,7 +121,7 @@ contains
                 exit
             end if
         end do
-    end function marsaglia_tsang
+    end function marsagliaTsang
 
     ! generate gamma random numbers
     real(DP) function rgamma(alpha, beta, seed) result(x)
@@ -132,10 +132,10 @@ contains
             error stop "Parameters must be strictly positive."
         end if
         if (alpha .gt. 1.0) then
-            ms = marsaglia_tsang(alpha, seed)
+            ms = marsagliaTsang(alpha, seed)
             x = ms / beta
         else
-            ms = marsaglia_tsang(alpha + 1.0_dp, seed)
+            ms = marsagliaTsang(alpha + 1.0_dp, seed)
             x = ms * (runif(0.0, 1.0, seed)**(1.0_dp / alpha)) / beta
         end if
     end function rgamma

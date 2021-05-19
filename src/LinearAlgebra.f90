@@ -47,7 +47,7 @@ contains
 
         do i = 1, m
             do j = 1, n
-                call minor_matrix(matrix, i, j, minor)
+                call minorMatrix(matrix, i, j, minor)
                 call determinant(minor, det)
                 cof(i, j) = (-1) ** (i + j) * det
             end do
@@ -87,9 +87,9 @@ contains
             stop
         end if
 
-        call minor_matrix(matrix, 1, 1, min1)
-        call minor_matrix(matrix, 1, 2, min2)
-        call minor_matrix(matrix, 1, 3, min3)
+        call minorMatrix(matrix, 1, 1, min1)
+        call minorMatrix(matrix, 1, 2, min2)
+        call minorMatrix(matrix, 1, 3, min3)
         call determinant2(min1, det1)
         call determinant2(min2, det2)
         call determinant2(min3, det3)
@@ -265,7 +265,7 @@ contains
         end do
     end subroutine ludcmp
 
-    subroutine minor_matrix(matrix, i, j, res)
+    subroutine minorMatrix(matrix, i, j, res)
         real(DP), dimension(:, :), intent(in) :: matrix
         real(DP), allocatable, dimension(:, :), intent(inout) :: res
         integer, intent(in) :: i, j
