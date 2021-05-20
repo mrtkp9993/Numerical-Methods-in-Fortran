@@ -238,14 +238,11 @@ contains
             r(k, k) = norm2(q(:, k))
             q(:, k) = q(:, k) / r(k, k)
 
-            if (.not. allocated(t1)) allocate(t1(m, 1))
             t1 = reshape(q(:, k), (/1, m/))
             t2 = reshape(q(:, k+1:n), (/m, n-k/))
 
             r(k, k+1:n) = reshape(matmul(t1,t2), (/n-k/))
 
-            if (.not. allocated(t3)) allocate(t3(1, n-k))
-            if (.not. allocated(t3)) allocate(t3(m, 1))
             t3 = reshape(r(k, k+1:n), (/1, n-k/))
             t4 = reshape(q(:, k), (/m, 1/))
 

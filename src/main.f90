@@ -57,7 +57,7 @@ program main
     call determinant(m3, det3)
     call cofactor(m1, cf1) ! add test
     call inverse(m1, inv1) ! add test
-    call gramschmidt(m3, gq1, gr1) ! add test
+    call gramschmidt(m1, gq1, gr1) ! add test
 
     call tester%init()
 
