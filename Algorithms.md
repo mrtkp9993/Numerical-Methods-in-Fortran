@@ -1,6 +1,6 @@
 # Algorithms
 
-The list of algorithms currently implemented is as follows.
+The list of algorithms currently implemented is as follows. List was last updated at 20/05/2021.
 
 <table>
 <thead>
