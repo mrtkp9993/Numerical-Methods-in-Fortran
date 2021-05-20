@@ -8,6 +8,10 @@ Numerical analysis, statistics algorithms in Fortran.
 
 Two years ago, I developed some numerical analysis examples with C++ and a few months ago, I started development with Julia but I give up with Julia (click [here](https://github.com/mrtkp9993/NumericalAlgorithms.jl/blob/main/README.md) for my reasons) and I decided to develop algorithms with Fortran.
 
+## Algorithms
+
+See [Algorithms](Algorithms.md).
+
 ## Distribution Tests
 
 See [Distributions](Distributions.md).
