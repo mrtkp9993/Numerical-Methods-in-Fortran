@@ -210,6 +210,50 @@ contains
         end do
     end subroutine gauss
 
+    subroutine gramschmidt(matrix, q, r)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), allocatable, dimension(:, :), intent(inout) :: q, r
+        ! temporary arrays for calculations
+        real(DP), allocatable, dimension(:, :) :: t1, t2, t3, t4
+        integer :: m, n, i, j, k
+
+        m = size(matrix, 1)
+        n = size(matrix, 2)
+
+        if (.not. (n .le. m)) then
+            error stop "Column count must be equal or smaller than row count."
+        end if
+
+        if (.not. allocated(q)) allocate(q(m, n))
+        if (.not. allocated(r)) allocate(r(m, n))
+
+        do i = 1, m
+            do j = 1, n
+                r(i, j) = 0.0_dp
+            end do
+        end do
+
+        q = matrix
+        do k = 1, n
+            r(k, k) = norm2(q(:, k))
+            q(:, k) = q(:, k) / r(k, k)
+
+            if (.not. allocated(t1)) allocate(t1(m, 1))
+            t1 = reshape(q(:, k), (/1, m/))
+            t2 = reshape(q(:, k+1:n), (/m, n-k/))
+
+            r(k, k+1:n) = reshape(matmul(t1,t2), (/n-k/))
+
+            if (.not. allocated(t3)) allocate(t3(1, n-k))
+            if (.not. allocated(t3)) allocate(t3(m, 1))
+            t3 = reshape(r(k, k+1:n), (/1, n-k/))
+            t4 = reshape(q(:, k), (/m, 1/))
+
+            q(:, k+1:n) = q(:, k+1:n) - matmul(t4, t3)
+        end do
+
+    end subroutine gramschmidt
+
     subroutine inverse(matrix, inv)
         real(DP), dimension(:, :), intent(in) :: matrix
         real(DP), allocatable, dimension(:, :), intent(inout) :: inv

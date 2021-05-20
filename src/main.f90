@@ -36,7 +36,7 @@ program main
                                                  2.0_dp, 4.0_dp, 6.0_dp /), &
                                                shape(a), order=(/2, 1/))
     real(DP), dimension(3) :: b = (/4.0_dp, 3.0_dp, 7.0_dp/)
-    real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1,cf1,inv1
+    real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1,cf1,inv1,gq1,gr1
     real(DP), allocatable, dimension(:) :: x
 
     real(DP) :: p00, p01, res1, p10, p11, res2, det1, det2, det3
@@ -57,6 +57,7 @@ program main
     call determinant(m3, det3)
     call cofactor(m1, cf1) ! add test
     call inverse(m1, inv1) ! add test
+    call gramschmidt(m3, gq1, gr1) ! add test
 
     call tester%init()
 
