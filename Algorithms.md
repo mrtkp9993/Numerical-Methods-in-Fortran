@@ -138,19 +138,15 @@ The list of algorithms currently implemented is as follows.
     <td></td>
   </tr>
   <tr>
-    <td>RootFinding</td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td rowspan="3">RootFinding</td>
+    <td colspan="3"></td>
   </tr>
   <tr>
-    <td></td>
     <td>secantMethod</td>
     <td>1D root finding.</td>
     <td></td>
   </tr>
   <tr>
-    <td></td>
     <td>broydenMethod</td>
     <td>N-dim. root finding [NOT IMPLEMENTED YET].</td>
     <td></td>
