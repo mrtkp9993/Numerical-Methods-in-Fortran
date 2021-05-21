@@ -324,6 +324,35 @@ contains
         end do
     end subroutine
 
+    subroutine qriter(matrix, iter, eigenvals)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), allocatable, dimension(:), intent(inout) :: eigenvals
+        integer, intent(in) :: iter
+        real(DP), allocatable, dimension(:, :) :: q, r
+        real(DP), allocatable, dimension(:, :) :: mat
+        integer :: m, n, i
+
+        m = size(matrix, 1)
+        n = size(matrix, 2)
+
+        if (m .ne. n) then
+            error stop "Input matrix must be a square matrix."
+        end if
+
+        if (.not. allocated(eigenvals)) allocate(eigenvals(m))
+        if (.not. allocated(mat)) allocate(mat(m, n))
+
+        mat = matrix
+        do i = 1, iter
+            call gramschmidt(mat, q, r)
+            mat = matmul(r, q)
+        end do
+        do i = 1, m
+            eigenvals(i) = r(i,i)
+        end do
+
+    end
+
     subroutine transpose(matrix, trs)
         real(DP), dimension(:, :), intent(in) :: matrix
         real(DP), allocatable, dimension(:, :), intent(inout) :: trs

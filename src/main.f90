@@ -31,13 +31,19 @@ program main
                                                   5.77, 4.46, 4.78, 4.28, 2.59, &
                                                   1.03, 0.16, 6.59, 7.72, 7.11 /), &
                                                 shape(m3), order=(/2,1/))
+    real(DP), dimension(5, 5) :: m4 = reshape ( (/17, 24, 1, 8, 15, &
+                                                  23, 5, 7, 14, 16, &
+                                                  4, 6, 13, 20, 22, &
+                                                  10, 12, 19, 21, 3, &
+                                                  11, 18, 25, 2, 9/), &
+                                                shape(m4), order=(/2, 1/))
     real(DP), dimension(3, 3) :: a = reshape( (/ 0.0_dp, 1.0_dp, 2.0_dp, &
                                                  2.0_dp, 1.0_dp, 4.0_dp, &
                                                  2.0_dp, 4.0_dp, 6.0_dp /), &
                                                shape(a), order=(/2, 1/))
     real(DP), dimension(3) :: b = (/4.0_dp, 3.0_dp, 7.0_dp/)
     real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1,cf1,inv1,gq1,gr1
-    real(DP), allocatable, dimension(:) :: x
+    real(DP), allocatable, dimension(:) :: x, eigv1
 
     real(DP) :: p00, p01, res1, p10, p11, res2, det1, det2, det3
     integer :: nmax = 100
@@ -58,6 +64,8 @@ program main
     call cofactor(m1, cf1) ! add test
     call inverse(m1, inv1) ! add test
     call gramschmidt(m1, gq1, gr1) ! add test
+    ! eigenvalues 65, +-21.28, +-13.13
+    call qriter(m4, 50, eigv1) ! basic QR iteration - Bad results
 
     call tester%init()
 
