@@ -42,8 +42,9 @@ program main
                                                  2.0_dp, 4.0_dp, 6.0_dp /), &
                                                shape(a), order=(/2, 1/))
     real(DP), dimension(3) :: b = (/4.0_dp, 3.0_dp, 7.0_dp/)
-    real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1,cf1,inv1,gq1,gr1
-    real(DP), allocatable, dimension(:) :: x, eigv1
+    real(DP), dimension(5) :: b2 = (/1.0_dp, 5.0_dp, 2.0_dp, 1.0_dp, 1.0_dp/)
+    real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1,cf1,inv1,gq1,gr1,aq1,ah1
+    real(DP), allocatable, dimension(:) :: x, eigv1, eigv2
 
     real(DP) :: p00, p01, res1, p10, p11, res2, det1, det2, det3
     integer :: nmax = 100
@@ -66,6 +67,7 @@ program main
     call gramschmidt(m1, gq1, gr1) ! add test
     ! eigenvalues 65, +-21.28, +-13.13
     call qriter(m4, 50, eigv1) ! basic QR iteration - Bad results
+    call arnoldi(m4, b2, 5, aq1, ah1) ! add tests
 
     call tester%init()
 

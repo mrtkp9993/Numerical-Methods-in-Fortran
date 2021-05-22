@@ -4,6 +4,52 @@ module LinearAlgebra
 
 contains
 
+    subroutine arnoldi(matrix, u, m, Q, H)
+        real(DP), dimension(:, :), intent(in) :: matrix
+        real(DP), dimension(:), intent(inout) :: u
+        real(DP), allocatable, dimension(:, :), intent(inout) :: Q, H
+        real(DP), allocatable, dimension(:) :: v, t2
+        real(DP), allocatable, dimension(:, :) :: t1
+        integer, intent(in) :: m
+        integer :: n, i, j
+
+        if (size(matrix, 1) .ne. size(matrix, 2)) then
+            error stop "Input matrix must be a square matrix."
+        end if
+
+        n = size(matrix, 1)
+
+        if (.not. allocated(Q)) allocate(Q(n, m))
+        if (.not. allocated(H)) allocate(H(m, m))
+
+        do i = 1, n
+            do j = 1, m
+                Q(i, j) = 0.0_dp
+            end do
+        end do
+        do i = 1, m
+            do j = 1, m
+                H(i, j) = 0.0_dp
+            end do
+        end do
+
+        Q(:, 1) = u / norm2(u)
+        do j = 1, m
+            v = matmul(matrix, Q(:, j))
+            do i = 1, j
+                call transpose(reshape(Q(:, i), (/1, n/)), t1)
+                t2 = matmul(t1, v)
+                H(i, j) = t2(1)
+                v = v - H(i, j) * Q(:, i)
+            end do
+            if (j .ne. m) then
+                H(j+1, j) = norm2(v)
+                Q(:, j+1) = v / H(j+1, j)
+            end if
+        end do
+
+    end subroutine arnoldi
+
     subroutine cholesky(matrix, l)
         real(DP), dimension(:, :), intent(in) :: matrix
         real(DP), allocatable, dimension(:, :), intent(inout) :: l

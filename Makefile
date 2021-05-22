@@ -1,7 +1,7 @@
 COMPILER = gfortran
 FLAGS = -Wall -Wextra -Wconversion \
 		-O2 -fdefault-real-16 -freal-8-real-16 \
-		-fdefault-integer-8
+		-fdefault-integer-8 -g
 
 SRC=src
 OBJ=obj
