@@ -18,8 +18,8 @@ set(SOURCE_FILES src/main.f90)
 
 add_library(lib SHARED src/Assert.f90 src/Commons.f90 src/Constants.f90
                        src/Distributions.f90 src/IO.f90 src/LinearAlgebra.f90
-                       src/Plots.f90 src/Random.f90 src/RootFinding.f90
-                       src/Testing.f90
+                       src/Plots.f90  src/Polynomials.f90 src/Random.f90
+                       src/RootFinding.f90 src/Testing.f90
         )
 
 add_executable(${TARGET} ${SOURCE_FILES})

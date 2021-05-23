@@ -5,6 +5,7 @@ program main
     use Distributions
     use IO
     use LinearAlgebra
+    use Polynomials
     use Random
     use RootFinding
     use Testing
@@ -68,6 +69,7 @@ program main
     ! eigenvalues 65, +-21.28, +-13.13
     call qriter(m4, 50, eigv1) ! basic QR iteration - Bad results
     call arnoldi(m4, b2, 5, aq1, ah1) ! add tests
+    print*, horner((/-1.0_dp, 2.0_dp, -6.0_dp, 2.0_dp/), 3.0_dp)
 
     call tester%init()
 
