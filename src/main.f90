@@ -4,6 +4,7 @@ program main
     use Constants
     use Distributions
     use IO
+    use Interpolation
     use LinearAlgebra
     use Polynomials
     use Random
@@ -45,10 +46,15 @@ program main
     real(DP), dimension(3) :: b = (/4.0_dp, 3.0_dp, 7.0_dp/)
     real(DP), dimension(5) :: b2 = (/1.0_dp, 5.0_dp, 2.0_dp, 1.0_dp, 1.0_dp/)
     real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1,cf1,inv1,gq1,gr1,aq1,ah1
-    real(DP), allocatable, dimension(:) :: x, eigv1, eigv2
+    real(DP), allocatable, dimension(:) :: x, eigv1, eigv2, yEval1
 
     real(DP) :: p00, p01, res1, p10, p11, res2, det1, det2, det3
     integer :: nmax = 100
+
+    real(DP), dimension(4) :: xData = (/-1.0_dp, 0.0_dp, 1.0_dp, 2.0_dp/)
+    real(DP), dimension(4) :: yData = (/1.937_dp, 1.0_dp, 1.349_dp, -0.995_dp/)
+    real(DP), dimension(3) :: xEval1 = (/-0.5_dp, 0.5_dp, 1.5_dp/)
+    integer :: n = 3
 
     p00 = 1.5_dp
     p01 = 2.0_dp
@@ -70,6 +76,8 @@ program main
     call qriter(m4, 50, eigv1) ! basic QR iteration - Bad results
     call arnoldi(m4, b2, 5, aq1, ah1) ! add tests
     print*, horner((/-1.0_dp, 2.0_dp, -6.0_dp, 2.0_dp/), 3.0_dp)
+    call interp(xData, yData, xEval1, yEval1)
+    print*, yEval1
 
     call tester%init()
 
