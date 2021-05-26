@@ -37,7 +37,7 @@ contains
         do j = 1, m
             v = matmul(matrix, Q(:, j))
             do i = 1, j
-                call transpose(reshape(Q(:, i), (/1, n/)), t1)
+                call transpose(reshape(Q(:, i), (/n, 1/)), t1)
                 t2 = matmul(t1, v)
                 H(i, j) = t2(1)
                 v = v - H(i, j) * Q(:, i)
@@ -406,10 +406,10 @@ contains
 
         m = size(matrix, 1)
         n = size(matrix, 2)
-        if (.not. allocated(trs)) allocate(trs(m, n))
+        if (.not. allocated(trs)) allocate(trs(n, m))
 
-        do i = 1, m
-            do j = 1, n
+        do i = 1, n
+            do j = 1, m
                 trs(i, j) = matrix(j, i)
             end do
         end do

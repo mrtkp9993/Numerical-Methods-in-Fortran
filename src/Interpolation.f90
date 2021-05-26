@@ -99,9 +99,9 @@ module Interpolation
             if (.not. allocated(coeffs)) allocate(coeffs(n-1, 4))
             if (.not. allocated(h)) allocate(h(n-1))
             if (.not. allocated(alpha)) allocate(alpha(n-2))
-            if (.not. allocated(l)) allocate(l(n))
-            if (.not. allocated(mu)) allocate(mu(n))
-            if (.not. allocated(z)) allocate(z(n))
+            if (.not. allocated(l)) allocate(l(n-1))
+            if (.not. allocated(mu)) allocate(mu(n-1))
+            if (.not. allocated(z)) allocate(z(n-1))
 
             do i = 1, n-1
                 coeffs(i, 1) = yData(i)
@@ -111,7 +111,7 @@ module Interpolation
                 h(i) = xData(i+1)-xData(i)
             end do
 
-            do i = 1, n
+            do i = 1, n-2
                 l(i) = 0.0_dp
                 mu(n) = 0.0_dp
                 z(n) = 0.0_dp
@@ -121,7 +121,7 @@ module Interpolation
                 alpha(i) = 0.0_dp
             end do
 
-            do i = 2, n-1
+            do i = 2, n-2
                 alpha(i) = (3.0_dp / h(i) * (yData(i+1) - yData(i)))  &
                         - (3.0_dp / h(i-1) * (yData(i) - yData(i-1)))
             end do
@@ -129,14 +129,14 @@ module Interpolation
             l(1) = 1.0_dp
             mu(1) = 0.0_dp
             z(1) = 0.0_dp
-            do i = 2, n-1
+            do i = 2, n-2
                 l(i) = 2*(xData(i+1)-xData(i-1)) - (h(i-1) * mu(i-1))
                 mu(i) = h(i) / l(i)
                 z(i) = (alpha(i) - h(i-1) * z(i-1)) / l(i)
             end do
-            l(n) = 1.0_dp
-            mu(n) = 0.0_dp
-            z(n) = 0.0_dp
+            l(n-1) = 1.0_dp
+            mu(n-1) = 0.0_dp
+            z(n-1) = 0.0_dp
 
             do j = n-1, 1, -1
                 coeffs(j, 3) = z(j) - mu(j) * coeffs(j+1, 3)
