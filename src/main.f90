@@ -46,7 +46,7 @@ program main
     real(DP), dimension(3) :: b = (/4.0_dp, 3.0_dp, 7.0_dp/)
     real(DP), dimension(5) :: b2 = (/1.0_dp, 5.0_dp, 2.0_dp, 1.0_dp, 1.0_dp/)
     real(DP), allocatable, dimension(:, :) :: l1,u1,l2,rr1,cf1,inv1,gq1,gr1,aq1,ah1
-    real(DP), allocatable, dimension(:) :: x, eigv1, eigv2, yEval1
+    real(DP), allocatable, dimension(:) :: x, eigv1, eigv2, yEval1, yEval2
 
     real(DP) :: p00, p01, res1, p10, p11, res2, det1, det2, det3
     integer :: nmax = 100
@@ -75,9 +75,11 @@ program main
     ! eigenvalues 65, +-21.28, +-13.13
     call qriter(m4, 50, eigv1) ! basic QR iteration - Bad results
     call arnoldi(m4, b2, 5, aq1, ah1) ! add tests
-    print*, horner((/-1.0_dp, 2.0_dp, -6.0_dp, 2.0_dp/), 3.0_dp)
-    call interp(xData, yData, xEval1, yEval1)
+    print*, horner((/-1.0_dp, 2.0_dp, -6.0_dp, 2.0_dp/), 3.0_dp) ! add tests
+    call interp(xData, yData, xEval1, yEval1) ! add tests
     print*, yEval1
+    call lagrangep(xData, yData, xEval1, yEval2) ! add tests
+    print*, yEval2
 
     call tester%init()
 
