@@ -78,8 +78,8 @@ program main
     call arnoldi(m4, b2, 5, aq1, ah1)
     call interp(xData, yData, xEval1, yEval1)
     call lagrangep(xData, yData, xEval1, yEval2)
-    call naturalcubicspline(xData2, yData2, lc1)
-    call printMatrix(lc1)
+    !call naturalcubicspline(xData2, yData2, lc1)
+    !call printMatrix(lc1)
 
     call tester%init()
 
