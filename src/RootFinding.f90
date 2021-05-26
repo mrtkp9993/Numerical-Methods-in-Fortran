@@ -26,7 +26,7 @@ contains
         do while (i .le. nmax)
             p2 = tp0 - f(tp0) * ((tp1 - tp0) / (f(tp1) - f(tp0)))
             if (abs(p2 - tp1) .lt. tol) then
-                print *, "Root found after ", i, " iterations: ", p2
+                !print *, "Root found after ", i, " iterations: ", p2
                 res = p2
                 return
             end if
@@ -34,7 +34,7 @@ contains
             tp0 = tp1
             tp1 = p2
         end do
-        print *, "Method failed after ", i, " iterations."
+        !print *, "Method failed after ", i, " iterations."
         ! res = NaN
         res = 0
         res = 0 / res

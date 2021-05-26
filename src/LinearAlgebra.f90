@@ -221,7 +221,7 @@ contains
                 end if
             end do
 
-            if (p .eq. 0.0_dp) then
+            if (abs(p - 0.0_dp) .lt. C_EPSILON) then
                 error stop "The matrix is singular."
             end if
 

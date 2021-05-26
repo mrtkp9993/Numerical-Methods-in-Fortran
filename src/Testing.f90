@@ -29,7 +29,7 @@ contains
         real(DP), intent(in) :: actual, expected
 
         this%numTests = this%numTests + 1
-        if (actual .ne. expected) then
+        if (abs(actual - expected) .gt. C_EPSILON) then
             this%numFailed = this%numFailed + 1
             this%failedTests = [this%failedTests, name]
             this%failedTestsActual = [this%failedTestsActual, actual]
@@ -43,7 +43,7 @@ contains
         real(DP), intent(in) :: actual, expected, tol
 
         this%numTests = this%numTests + 1
-        if (abs(actual - expected) .ge. tol) then
+        if (abs(actual - expected) .gt. tol) then
             this%numFailed = this%numFailed + 1
             this%failedTests = [this%failedTests, name]
             this%failedTestsActual = [this%failedTestsActual, actual]
@@ -95,6 +95,9 @@ contains
             deallocate(this%failedTests)
             error stop "There are failed tests."
         end if
+
+        deallocate(this%failedTestsActual)
+        deallocate(this%failedTestsExpctd)
     end subroutine end
 
 end module Testing

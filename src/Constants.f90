@@ -18,4 +18,6 @@ module Constants
     real(DP), parameter :: C_SQRTPI = 1.77245385090551602730_dp
     real(DP), parameter :: C_SQRT2PI = 2.50662827463100050242_dp
 
+    real(DP), parameter :: C_EPSILON = epsilon(C_E)
+
 end module Constants
