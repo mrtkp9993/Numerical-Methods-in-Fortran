@@ -45,7 +45,7 @@ program main
                                                shape(a), order=(/2, 1/))
     real(DP), dimension(3) :: b = (/4.0_dp, 3.0_dp, 7.0_dp/)
     real(DP), dimension(5) :: b2 = (/1.0_dp, 5.0_dp, 2.0_dp, 1.0_dp, 1.0_dp/)
-    real(DP), allocatable, dimension(:, :) :: cf1,inv1,gq1,gr1,aq1,ah1,lc1
+    real(DP), allocatable, dimension(:, :) :: cf1,inv1,gq1,gr1,aq1,ah1
     real(DP), allocatable, dimension(:) :: x, eigv1, yEval1, yEval2
 
     real(DP) :: p00, p01, res1, p10, p11, res2, det1, det2, det3, det4
@@ -54,9 +54,6 @@ program main
     real(DP), dimension(4) :: xData = (/-1.0_dp, 0.0_dp, 1.0_dp, 2.0_dp/)
     real(DP), dimension(4) :: yData = (/1.937_dp, 1.0_dp, 1.349_dp, -0.995_dp/)
     real(DP), dimension(3) :: xEval1 = (/-0.5_dp, 0.5_dp, 1.5_dp/)
-
-    real(DP), dimension(4) :: xData2 = (/0.0_dp, 1.0_dp, 2.0_dp, 3.0_dp/)
-    real(DP), dimension(4) :: yData2 = (/1.0_dp, C_E, C_E**2, C_E**3/)
 
     p00 = 1.5_dp
     p01 = 2.0_dp
