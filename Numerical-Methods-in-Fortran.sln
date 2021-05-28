@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31313.79
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9AE66E24-D2D9-4FF2-AB7F-CE79F20F2B8B}") = "ExampleApplication", "ExampleApplication\ExampleApplication.ftn95p", "{F09BF25C-975C-44AA-8AD0-438120312569}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC} = {2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}
+	EndProjectSection
+EndProject
+Project("{9AE66E24-D2D9-4FF2-AB7F-CE79F20F2B8B}") = "Library", "Library\Library.ftn95p", "{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CheckMate|.NET = CheckMate|.NET
+		CheckMate|x64 = CheckMate|x64
+		CheckMate|x86 = CheckMate|x86
+		Debug|.NET = Debug|.NET
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|.NET = Release|.NET
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F09BF25C-975C-44AA-8AD0-438120312569}.CheckMate|.NET.ActiveCfg = CheckMate|.NET
+		{F09BF25C-975C-44AA-8AD0-438120312569}.CheckMate|.NET.Build.0 = CheckMate|.NET
+		{F09BF25C-975C-44AA-8AD0-438120312569}.CheckMate|x64.ActiveCfg = CheckMate|x64
+		{F09BF25C-975C-44AA-8AD0-438120312569}.CheckMate|x64.Build.0 = CheckMate|x64
+		{F09BF25C-975C-44AA-8AD0-438120312569}.CheckMate|x86.ActiveCfg = CheckMate|Win32
+		{F09BF25C-975C-44AA-8AD0-438120312569}.CheckMate|x86.Build.0 = CheckMate|Win32
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Debug|.NET.ActiveCfg = Debug|.NET
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Debug|.NET.Build.0 = Debug|.NET
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Debug|x64.ActiveCfg = Debug|x64
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Debug|x64.Build.0 = Debug|x64
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Debug|x86.ActiveCfg = CheckMate|Win32
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Debug|x86.Build.0 = CheckMate|Win32
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Release|.NET.ActiveCfg = Release|.NET
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Release|.NET.Build.0 = Release|.NET
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Release|x64.ActiveCfg = Release|x64
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Release|x64.Build.0 = Release|x64
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Release|x86.ActiveCfg = Release|Win32
+		{F09BF25C-975C-44AA-8AD0-438120312569}.Release|x86.Build.0 = Release|Win32
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.CheckMate|.NET.ActiveCfg = CheckMate|.NET
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.CheckMate|.NET.Build.0 = CheckMate|.NET
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.CheckMate|x64.ActiveCfg = CheckMate|x64
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.CheckMate|x64.Build.0 = CheckMate|x64
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.CheckMate|x86.ActiveCfg = CheckMate|Win32
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.CheckMate|x86.Build.0 = CheckMate|Win32
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Debug|.NET.ActiveCfg = Debug|.NET
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Debug|.NET.Build.0 = Debug|.NET
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Debug|x64.ActiveCfg = Debug|x64
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Debug|x64.Build.0 = Debug|x64
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Debug|x86.ActiveCfg = CheckMate|Win32
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Debug|x86.Build.0 = CheckMate|Win32
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Release|.NET.ActiveCfg = Release|.NET
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Release|.NET.Build.0 = Release|.NET
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Release|x64.ActiveCfg = Release|x64
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Release|x64.Build.0 = Release|x64
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Release|x86.ActiveCfg = Release|Win32
+		{2833F5DC-C6D6-47A2-BC7C-B4E835D6D0EC}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8836AEE8-56E2-421C-A0A2-EFB05DF8B1CD}
+	EndGlobalSection
+EndGlobal
