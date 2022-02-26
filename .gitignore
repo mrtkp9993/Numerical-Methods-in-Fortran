@@ -163,3 +163,4 @@ CMakeUserPresets.json
 ### CMake Patch ###
 # External projects
 *-prefix/
+/Debug/
