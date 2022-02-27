@@ -13,10 +13,10 @@ contains
 
         if (abs(actual-expected) .le. tol) then
             equal = .true.
-            call loggerA%plog("Assert", "Variables are equal with " // str(tol) // " tolerance.")
+            call loggerA%plog("Assert", "Variables are equal with " // str(tol))
         else
             equal = .false.
-            call loggerA%plog("Assert", "Variables are not equal with " // str(tol) // " tolerance.")
+            call loggerA%plog("Assert", "Variables are not equal with " // str(tol))
         end if
     end function assertEqualsWith
 
