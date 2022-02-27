@@ -1,6 +1,10 @@
 module Assert
     use Constants
+    use Logging
+    use Utils
     implicit none
+
+    type(Logger) :: loggerA
 
 contains
 
@@ -9,10 +13,10 @@ contains
 
         if (abs(actual-expected) .le. tol) then
             equal = .true.
-            write(*,*) "Variables are equal to ", tol
+            call loggerA%plog("Assert", "Variables are equal with " // str(tol) // " tolerance.")
         else
             equal = .false.
-            write(*,*) "Variables are not equal to ", tol
+            call loggerA%plog("Assert", "Variables are not equal with " // str(tol) // " tolerance.")
         end if
     end function assertEqualsWith
 
