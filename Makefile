@@ -9,7 +9,7 @@ OBJ=obj
 BIN=bin
 
 EXEC = $(BIN)/main
-OBJS = Utils.o Assert.o Constants.o Logging.o 
+OBJS = Utils.o Assert.o Constants.o Logging.o Testing.o
 
 all: $(SRC)/main.f90 $(OBJS)
 	$(COMPILER) $(FLAGS) -o $(EXEC) $(SRC)/main.f90 $(OBJS)
@@ -28,3 +28,6 @@ Logging.o: $(SRC)/Logging.f90
 
 Utils.o: $(SRC)/Utils.f90
 	$(COMPILER) $(FLAGS) -c $(SRC)/Utils.f90
+
+Testing.o: $(SRC)/Testing.f90
+	$(COMPILER) $(FLAGS) -c $(SRC)/Testing.f90
