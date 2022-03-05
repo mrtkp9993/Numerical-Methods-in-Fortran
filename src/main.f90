@@ -16,6 +16,11 @@ program main
    real(DP) :: r1 = C_E**C_PI - C_PI
    real(DP) :: e1 = 19.999099979189475767_dp
 
+   integer :: i1 = 7567423
+   integer :: j = 3
+   integer :: k = 7
+   integer :: tmp
+
    real(DP), dimension(5, 5) :: mat1 = reshape( (/ 7.80, 6.69, 1.85, 8.07, 2.71, &
                                                    4.82, 6.48, 6.64, 1.89, 0.18, &
                                                    1.08, 7.93, 3.98, 0.56, 2.13, &
@@ -44,7 +49,7 @@ program main
 
    ! Random 
    call loggerM%plog("main", "Generating numbers...")
-   do i = 1, 100000
+   do i = 1, 2
        print *, "Iter: ", i
        randomData(i, 1) = roundNearN(runif(3.0_dp, 7.0_dp, seed), 8)
        randomData(i, 2) = roundNearN(rnorm(4.0_dp, 0.3_dp, seed), 8)

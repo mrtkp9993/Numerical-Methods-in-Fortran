@@ -2,11 +2,32 @@ module Utils
    use Constants
    implicit none
 contains
+
    character(len=40) function str(k) result(str1)
       real(DP), intent(in) :: k
       write (str1, '(f20.10)') k
       str1 = adjustl(str1)
    end function str
+
+   integer function str2int(str1) result(int1)
+      character(*), intent(in) :: str1
+      read(str1, *) int1
+   end function str2int
+
+   subroutine num2digits(num, res_digs)
+      integer, intent(in) :: num
+      integer, dimension(:), allocatable, intent(inout) :: res_digs
+      integer :: num_digits, ix, rem
+
+      num_digits = floor(log10(real(num))+1)
+      allocate(res_digs(num_digits))
+
+      rem = num
+      do ix = 1, num_digits
+         res_digs(num_digits-ix+1) = rem - (rem / 10)*10
+         rem = rem / 10
+      end do
+   end subroutine num2digits
 
     ! Approximation to Error function
    real(DP) function erfun(x) result(y)

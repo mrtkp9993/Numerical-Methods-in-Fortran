@@ -9,7 +9,7 @@ OBJ=obj
 BIN=bin
 
 EXEC = $(BIN)/main
-OBJS = Constants.o Logging.o Random.o IO.o Testing.o Utils.o Assert.o Distr.o
+OBJS = Constants.o Logging.o Utils.o Random.o IO.o Testing.o Assert.o Distr.o
 
 all: $(SRC)/main.f90 $(OBJS)
 	$(COMPILER) $(FLAGS) -o $(EXEC) $(SRC)/main.f90 $(OBJS)
