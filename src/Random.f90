@@ -17,6 +17,7 @@ contains
     end function lcg
 
     ! Lagged Fibonacci generator
+    ! This implementation is not suitable for real applications
     real(DP) function lfg(seed, j, k, mod) result(randUnif)
         integer, intent(inout) :: seed
         integer, intent(in) :: j, k, mod
